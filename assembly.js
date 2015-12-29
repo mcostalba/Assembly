@@ -5,100 +5,134 @@
 // ***************************************************************************
 var ISA = {};
 
-ISA['NOP']  = { opcode:'00', parse_op:[p0, p0, p0] };
-ISA['ADC']  = { opcode:'02', parse_op:[pr, pr, pr] };
-ISA['ADCI'] = { opcode:'04', parse_op:[pr, pr, pn] };
-ISA['ADD']  = { opcode:'06', parse_op:[pr, pr, pr] };
-ISA['ADDI'] = { opcode:'08', parse_op:[pr, pr, pn] };
-ISA['CP']   = { opcode:'0A', parse_op:[p0, pr, pr] };
-ISA['CPI']  = { opcode:'0C', parse_op:[p0, pr, pn] };
-ISA['DEC']  = { opcode:'0E', parse_op:[pr, pr, p0] };
-ISA['INC']  = { opcode:'10', parse_op:[pr, pr, p0] };
-ISA['SBC']  = { opcode:'12', parse_op:[pr, pr, pr] };
-ISA['SBCI'] = { opcode:'14', parse_op:[pr, pr, pn] };
-ISA['SUB']  = { opcode:'16', parse_op:[pr, pr, pr] };
-ISA['SUBI'] = { opcode:'18', parse_op:[pr, pr, pn] };
+ISA['NOP']  = { opcode:'00', format:[p0, p0, p0] };
+ISA['ADC']  = { opcode:'02', format:[pr, pr, pr] };
+ISA['ADCI'] = { opcode:'04', format:[pr, pr, pn] };
+ISA['ADD']  = { opcode:'06', format:[pr, pr, pr] };
+ISA['ADDI'] = { opcode:'08', format:[pr, pr, pn] };
+ISA['CP']   = { opcode:'0A', format:[p0, pr, pr] };
+ISA['CPI']  = { opcode:'0C', format:[p0, pr, pn] };
+ISA['DEC']  = { opcode:'0E', format:[pr, pr, p0] };
+ISA['INC']  = { opcode:'10', format:[pr, pr, p0] };
+ISA['SBC']  = { opcode:'12', format:[pr, pr, pr] };
+ISA['SBCI'] = { opcode:'14', format:[pr, pr, pn] };
+ISA['SUB']  = { opcode:'16', format:[pr, pr, pr] };
+ISA['SUBI'] = { opcode:'18', format:[pr, pr, pn] };
 
-ISA['AND']  = { opcode:'1A', parse_op:[pr, pr, pr] };
-ISA['ANDI'] = { opcode:'1D', parse_op:[pr, pr, pn] };
-ISA['OR']   = { opcode:'20', parse_op:[pr, pr, pr] };
-ISA['ORI']  = { opcode:'23', parse_op:[pr, pr, pn] };
-ISA['XOR']  = { opcode:'26', parse_op:[pr, pr, pr] };
-ISA['XORI'] = { opcode:'29', parse_op:[pr, pr, pn] };
+ISA['AND']  = { opcode:'1A', format:[pr, pr, pr] };
+ISA['ANDI'] = { opcode:'1D', format:[pr, pr, pn] };
+ISA['OR']   = { opcode:'20', format:[pr, pr, pr] };
+ISA['ORI']  = { opcode:'23', format:[pr, pr, pn] };
+ISA['XOR']  = { opcode:'26', format:[pr, pr, pr] };
+ISA['XORI'] = { opcode:'29', format:[pr, pr, pn] };
 
-ISA['RL']   = { opcode:'2C', parse_op:[pr, pr, p0] };
-ISA['RLD']  = { opcode:'2E', parse_op:[pr, pr, p0] };
-ISA['RR']   = { opcode:'30', parse_op:[pr, pr, p0] };
-ISA['RRD']  = { opcode:'32', parse_op:[pr, pr, p0] };
-ISA['SHL']  = { opcode:'34', parse_op:[pr, pr, p0] };
-ISA['SHR']  = { opcode:'36', parse_op:[pr, pr, p0] };
+ISA['RL']   = { opcode:'2C', format:[pr, pr, p0] };
+ISA['RLD']  = { opcode:'2E', format:[pr, pr, p0] };
+ISA['RR']   = { opcode:'30', format:[pr, pr, p0] };
+ISA['RRD']  = { opcode:'32', format:[pr, pr, p0] };
+ISA['SHL']  = { opcode:'34', format:[pr, pr, p0] };
+ISA['SHR']  = { opcode:'36', format:[pr, pr, p0] };
 
-ISA['SCF']  = { opcode:'3A', parse_op:[p0, p0, p0] };
-ISA['HLT']  = { opcode:'3C', parse_op:[p0, p0, p0] };
-ISA['PAI']  = { opcode:'3D', parse_op:[p0, p0, pn] };
-ISA['PAR']  = { opcode:'3F', parse_op:[p0, p0, pr] };
-ISA['PARM'] = { opcode:'41', parse_op:[p0, p0, pri] };
-ISA['PARC'] = { opcode:'43', parse_op:[p0, p0, pri] };
-ISA['PARD'] = { opcode:'45', parse_op:[p0, p0, pri] };
-ISA['PARE'] = { opcode:'47', parse_op:[p0, p0, pri] };
-ISA['PARF'] = { opcode:'49', parse_op:[p0, p0, pri] };
+ISA['SCF']  = { opcode:'3A', format:[p0, p0, p0] };
+ISA['HLT']  = { opcode:'3C', format:[p0, p0, p0] };
+ISA['PAI']  = { opcode:'3D', format:[p0, p0, pn] };
+ISA['PAR']  = { opcode:'3F', format:[p0, p0, pr] };
+ISA['PARM'] = { opcode:'41', format:[p0, p0, pri] };
+ISA['PARC'] = { opcode:'43', format:[p0, p0, pri] };
+ISA['PARD'] = { opcode:'45', format:[p0, p0, pri] };
+ISA['PARE'] = { opcode:'47', format:[p0, p0, pri] };
+ISA['PARF'] = { opcode:'49', format:[p0, p0, pri] };
 
-ISA['EXX']  = { opcode:'4B', parse_op:[p0, p0, p0] };
-ISA['INV']  = { opcode:'4D', parse_op:[pr, p0, pr] };
-ISA['LD']   = { opcode:'4F', parse_op:[pr, p0, pr] };
-ISA['LDI']  = { opcode:'51', parse_op:[pr, p0, pn] };
+ISA['EXX']  = { opcode:'4B', format:[p0, p0, p0] };
+ISA['INV']  = { opcode:'4D', format:[pr, p0, pr] };
+ISA['LD']   = { opcode:'4F', format:[pr, p0, pr] };
+ISA['LDI']  = { opcode:'51', format:[pr, p0, pn] };
 
-ISA['LDA']  = { opcode:'53', parse_op:[pr, p0, pni] };
-ISA['LDAC'] = { opcode:'55', parse_op:[pr, p0, pni] };
-ISA['LDAD'] = { opcode:'57', parse_op:[pr, p0, pni] };
-ISA['LDAE'] = { opcode:'59', parse_op:[pr, p0, pni] };
-ISA['LDAF'] = { opcode:'5B', parse_op:[pr, p0, pni] };
-ISA['LDR']  = { opcode:'5D', parse_op:[pr, p0, pri] };
-ISA['LDRC'] = { opcode:'5F', parse_op:[pr, p0, pri] };
-ISA['LDRD'] = { opcode:'61', parse_op:[pr, p0, pri] };
-ISA['LDRE'] = { opcode:'63', parse_op:[pr, p0, pri] };
-ISA['LDRF'] = { opcode:'65', parse_op:[pr, p0, pri] };
-ISA['STA']  = { opcode:'67', parse_op:[p0, pr, pni] };
-ISA['STAC'] = { opcode:'69', parse_op:[p0, pr, pni] };
-ISA['STAD'] = { opcode:'6B', parse_op:[p0, pr, pni] };
-ISA['STAE'] = { opcode:'6D', parse_op:[p0, pr, pni] };
-ISA['STAF'] = { opcode:'6F', parse_op:[p0, pr, pni] };
-ISA['STR']  = { opcode:'71', parse_op:[p0, pr, pri] };
-ISA['STRC'] = { opcode:'73', parse_op:[p0, pr, pri] };
-ISA['STRD'] = { opcode:'75', parse_op:[p0, pr, pri] };
-ISA['STRE'] = { opcode:'77', parse_op:[p0, pr, pri] };
-ISA['STRF'] = { opcode:'79', parse_op:[p0, pr, pri] };
+ISA['LDA']  = { opcode:'53', format:[pr, p0, pni] };
+ISA['LDAC'] = { opcode:'55', format:[pr, p0, pni] };
+ISA['LDAD'] = { opcode:'57', format:[pr, p0, pni] };
+ISA['LDAE'] = { opcode:'59', format:[pr, p0, pni] };
+ISA['LDAF'] = { opcode:'5B', format:[pr, p0, pni] };
+ISA['LDR']  = { opcode:'5D', format:[pr, p0, pri] };
+ISA['LDRC'] = { opcode:'5F', format:[pr, p0, pri] };
+ISA['LDRD'] = { opcode:'61', format:[pr, p0, pri] };
+ISA['LDRE'] = { opcode:'63', format:[pr, p0, pri] };
+ISA['LDRF'] = { opcode:'65', format:[pr, p0, pri] };
+ISA['STA']  = { opcode:'67', format:[p0, pr, pni] };
+ISA['STAC'] = { opcode:'69', format:[p0, pr, pni] };
+ISA['STAD'] = { opcode:'6B', format:[p0, pr, pni] };
+ISA['STAE'] = { opcode:'6D', format:[p0, pr, pni] };
+ISA['STAF'] = { opcode:'6F', format:[p0, pr, pni] };
+ISA['STR']  = { opcode:'71', format:[p0, pr, pri] };
+ISA['STRC'] = { opcode:'73', format:[p0, pr, pri] };
+ISA['STRD'] = { opcode:'75', format:[p0, pr, pri] };
+ISA['STRE'] = { opcode:'77', format:[p0, pr, pri] };
+ISA['STRF'] = { opcode:'79', format:[p0, pr, pri] };
 
-ISA['JP']   = { opcode:'7B', parse_op:[p0, p0, pn] };
-ISA['JPN']  = { opcode:'7D', parse_op:[p0, p0, pn] };
-ISA['JPP']  = { opcode:'7F', parse_op:[p0, p0, pn] };
-ISA['JPZ']  = { opcode:'81', parse_op:[p0, p0, pn] };
-ISA['JPNZ'] = { opcode:'83', parse_op:[p0, p0, pn] };
-ISA['JPPO'] = { opcode:'85', parse_op:[p0, p0, pn] };
-ISA['JPNO'] = { opcode:'87', parse_op:[p0, p0, pn] };
-ISA['JPC']  = { opcode:'89', parse_op:[p0, p0, pn] };
-ISA['JPNC'] = { opcode:'8B', parse_op:[p0, p0, pn] };
+ISA['JP']   = { opcode:'7B', format:[p0, p0, pn] };
+ISA['JPN']  = { opcode:'7D', format:[p0, p0, pn] };
+ISA['JPP']  = { opcode:'7F', format:[p0, p0, pn] };
+ISA['JPZ']  = { opcode:'81', format:[p0, p0, pn] };
+ISA['JPNZ'] = { opcode:'83', format:[p0, p0, pn] };
+ISA['JPPO'] = { opcode:'85', format:[p0, p0, pn] };
+ISA['JPNO'] = { opcode:'87', format:[p0, p0, pn] };
+ISA['JPC']  = { opcode:'89', format:[p0, p0, pn] };
+ISA['JPNC'] = { opcode:'8B', format:[p0, p0, pn] };
 
-ISA['JR']   = { opcode:'8D', parse_op:[p0, p0, pn] };
-ISA['JRN']  = { opcode:'8F', parse_op:[p0, p0, pn] };
-ISA['JRP']  = { opcode:'91', parse_op:[p0, p0, pn] };
-ISA['JRZ']  = { opcode:'93', parse_op:[p0, p0, pn] };
-ISA['JRNZ'] = { opcode:'95', parse_op:[p0, p0, pn] };
-ISA['JRPO'] = { opcode:'97', parse_op:[p0, p0, pn] };
-ISA['JRNO'] = { opcode:'99', parse_op:[p0, p0, pn] };
-ISA['JRC']  = { opcode:'9B', parse_op:[p0, p0, pn] };
-ISA['JRNC'] = { opcode:'9D', parse_op:[p0, p0, pn] };
+ISA['JR']   = { opcode:'8D', format:[p0, p0, pn] };
+ISA['JRN']  = { opcode:'8F', format:[p0, p0, pn] };
+ISA['JRP']  = { opcode:'91', format:[p0, p0, pn] };
+ISA['JRZ']  = { opcode:'93', format:[p0, p0, pn] };
+ISA['JRNZ'] = { opcode:'95', format:[p0, p0, pn] };
+ISA['JRPO'] = { opcode:'97', format:[p0, p0, pn] };
+ISA['JRNO'] = { opcode:'99', format:[p0, p0, pn] };
+ISA['JRC']  = { opcode:'9B', format:[p0, p0, pn] };
+ISA['JRNC'] = { opcode:'9D', format:[p0, p0, pn] };
 
-ISA['LDSP'] = { opcode:'9F', parse_op:[p0, p0, p0] };
-ISA['POP']  = { opcode:'A1', parse_op:[pr, p0, p0] };
-ISA['PUSH'] = { opcode:'A4', parse_op:[p0, pr, p0] };
-ISA['POPF'] = { opcode:'A7', parse_op:[p0, p0, p0] };
-ISA['PUSHF']= { opcode:'AA', parse_op:[p0, p0, p0] };
+ISA['LDSP'] = { opcode:'9F', format:[p0, p0, p0] };
+ISA['POP']  = { opcode:'A1', format:[pr, p0, p0] };
+ISA['PUSH'] = { opcode:'A4', format:[p0, pr, p0] };
+ISA['POPF'] = { opcode:'A7', format:[p0, p0, p0] };
+ISA['PUSHF']= { opcode:'AA', format:[p0, p0, p0] };
 
-ISA['CALL'] = { opcode:'AD', parse_op:[p0, p0, pn] };
-ISA['RET']  = { opcode:'B1', parse_op:[p0, p0, p0] };
-ISA['JPM']  = { opcode:'B4', parse_op:[p0, p0, pri] };
-ISA['JPR']  = { opcode:'B6', parse_op:[p0, p0, pr] };
+ISA['CALL'] = { opcode:'AD', format:[p0, p0, pn] };
+ISA['RET']  = { opcode:'B1', format:[p0, p0, p0] };
+ISA['JPM']  = { opcode:'B4', format:[p0, p0, pri] };
+ISA['JPR']  = { opcode:'B6', format:[p0, p0, pr] };
+
+ISA['OTA']  = { opcode:'B8', format:[pp, p0, pni] };
+ISA['OTAC'] = { opcode:'BA', format:[pp, p0, pni] };
+ISA['OTAD'] = { opcode:'BC', format:[pp, p0, pni] };
+ISA['OTAE'] = { opcode:'BE', format:[pp, p0, pni] };
+ISA['OTAF'] = { opcode:'C0', format:[pp, p0, pni] };
+ISA['OUT']  = { opcode:'C2', format:[pp, pr, p0] };
+ISA['OTI']  = { opcode:'C4', format:[pp, p0, pn] };
+ISA['OTR']  = { opcode:'C6', format:[pp, p0, pri] };
+ISA['OTRC'] = { opcode:'C8', format:[pp, p0, pri] };
+ISA['OTRD'] = { opcode:'CA', format:[pp, p0, pri] };
+ISA['OTRE'] = { opcode:'CC', format:[pp, p0, pri] };
+ISA['OTRF'] = { opcode:'CE', format:[pp, p0, pri] };
+
+ISA['INA']  = { opcode:'D0', format:[p0, pp, pni] };
+ISA['INAC'] = { opcode:'D2', format:[p0, pp, pni] };
+ISA['INAD'] = { opcode:'D4', format:[p0, pp, pni] };
+ISA['INAE'] = { opcode:'D6', format:[p0, pp, pni] };
+ISA['INAF'] = { opcode:'D8', format:[p0, pp, pni] };
+ISA['IN']   = { opcode:'DA', format:[pn, pp, p0] };
+ISA['INR']  = { opcode:'DC', format:[p0, pp, pri] };
+ISA['INRC'] = { opcode:'DE', format:[p0, pp, pri] };
+ISA['INRD'] = { opcode:'E0', format:[p0, pp, pri] };
+ISA['INRE'] = { opcode:'E2', format:[p0, pp, pri] };
+ISA['INRF'] = { opcode:'E4', format:[p0, pp, pri] };
+
+ISA['LPRC'] = { opcode:'E6', format:[pn, p0, p0] };
+ISA['LPRD'] = { opcode:'E8', format:[pn, p0, p0] };
+ISA['LPRE'] = { opcode:'EA', format:[pn, p0, p0] };
+ISA['LPRF'] = { opcode:'EC', format:[pn, p0, p0] };
+ISA['SPRC'] = { opcode:'EE', format:[p0, pn, pn] };
+ISA['SPRD'] = { opcode:'F0', format:[p0, pn, pn] };
+ISA['SPRE'] = { opcode:'F2', format:[p0, pn, pn] };
+ISA['SPRF'] = { opcode:'F4', format:[p0, pn, pn] };
 
 
 // Ignore argument
@@ -136,6 +170,13 @@ function pni(reg) {
     return pn(reg.substring(1, reg.length - 1));
 }
 
+// Parse a port number (0-15)
+function pp(reg) {
+
+  reg = reg.trim()
+  if (reg.length == 1)
+    return parseInt(reg, 16);
+}
 
 // Our main function, parse an instruction and returns the corresponding code. This
 // function is the only one called from outside this module.
@@ -145,7 +186,7 @@ function parse2(m, d, a, l) {
 
   var code = String(m).trim().toUpperCase();
   var op = String(d).toUpperCase().split(',');
-  var addr = String(a).trim().toUpperCase();
+  //var addr = String(a).trim().toUpperCase();
   //var labels = String(Array(l)[0]).split(',');
 
   if (!(code in ISA))
@@ -153,7 +194,7 @@ function parse2(m, d, a, l) {
 
   var ins = 0, idx = 0;
 
-  ISA[code].parse_op.forEach(function(fun, pos) {
+  ISA[code].format.forEach(function(fun, pos) {
 
     ins = (ins << Shifts[pos]) + fun(op[idx]);
 
