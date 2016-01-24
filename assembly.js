@@ -138,12 +138,19 @@ ISA['SPRF'] = { opcode:'F4', format:[p0, pn, pn] };
 // Ignore argument
 function p0(reg) { return 0; }
 
-// Parse a 16 bit number
+// Parse a 16 bit number, if number is negative convert to 
+// two's complement notation.
 function pn(reg) {
 
   var id = parseInt(reg.trim());
-  if (!isNaN(id) && id >= 0 && id <= 0xFFFF)
+  if (!isNaN(id))
+  {
+    if (id < 0)
+      id = 0xFFFF + id; // Two's complement
+    
+    if (id >= 0 && id <= 0xFFFF)
       return id;
+  }
 }
 
 // Parse a register
