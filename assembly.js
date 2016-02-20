@@ -89,7 +89,7 @@ ISA['JRNO'] = { opcode:'99', format:[p0, p0, po] }
 ISA['JRC']  = { opcode:'9B', format:[p0, p0, po] }
 ISA['JRNC'] = { opcode:'9D', format:[p0, p0, po] }
 
-ISA['LDSP'] = { opcode:'9F', format:[p0, p0, p0] }
+ISA['LDSP'] = { opcode:'9F', format:[p0, p0, pn] }
 ISA['POP']  = { opcode:'A1', format:[pr, p0, p0] }
 ISA['PUSH'] = { opcode:'A4', format:[p0, pr, p0] }
 ISA['POPF'] = { opcode:'A7', format:[p0, p0, p0] }
@@ -200,6 +200,9 @@ function pai(reg) { return indirect(pa, reg) }
 // Our main function, parse an instruction and returns the corresponding code.
 // This function is the only one called from outside this module.
 function parse2(m, d, a, l) {
+  
+  var randnumber = Math.random() * 1000;
+  Utilities.sleep(randnumber); // Don't hang Google Spreadsheet
 
   var Shifts = [4, 4, 16]
 
