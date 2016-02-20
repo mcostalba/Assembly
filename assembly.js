@@ -118,21 +118,21 @@ ISA['INAC'] = { opcode:'D2', format:[p0, pp, pai] }
 ISA['INAD'] = { opcode:'D4', format:[p0, pp, pai] }
 ISA['INAE'] = { opcode:'D6', format:[p0, pp, pai] }
 ISA['INAF'] = { opcode:'D8', format:[p0, pp, pai] }
-ISA['IN']   = { opcode:'DA', format:[pn, pp, p0] }
+ISA['IN']   = { opcode:'DA', format:[pr, pp, p0] }
 ISA['INR']  = { opcode:'DC', format:[p0, pp, pri] }
 ISA['INRC'] = { opcode:'DE', format:[p0, pp, pri] }
 ISA['INRD'] = { opcode:'E0', format:[p0, pp, pri] }
 ISA['INRE'] = { opcode:'E2', format:[p0, pp, pri] }
 ISA['INRF'] = { opcode:'E4', format:[p0, pp, pri] }
 
-ISA['LPRC'] = { opcode:'E6', format:[pn, p0, p0] }
-ISA['LPRD'] = { opcode:'E8', format:[pn, p0, p0] }
-ISA['LPRE'] = { opcode:'EA', format:[pn, p0, p0] }
-ISA['LPRF'] = { opcode:'EC', format:[pn, p0, p0] }
-ISA['SPRC'] = { opcode:'EE', format:[p0, pn, pn] }
-ISA['SPRD'] = { opcode:'F0', format:[p0, pn, pn] }
-ISA['SPRE'] = { opcode:'F2', format:[p0, pn, pn] }
-ISA['SPRF'] = { opcode:'F4', format:[p0, pn, pn] }
+ISA['LPRC'] = { opcode:'E6', format:[pr, p0, p0] }
+ISA['LPRD'] = { opcode:'E8', format:[pr, p0, p0] }
+ISA['LPRE'] = { opcode:'EA', format:[pr, p0, p0] }
+ISA['LPRF'] = { opcode:'EC', format:[pr, p0, p0] }
+ISA['SPRC'] = { opcode:'EE', format:[p0, pr, pr] }
+ISA['SPRD'] = { opcode:'F0', format:[p0, pr, pr] }
+ISA['SPRE'] = { opcode:'F2', format:[p0, pr, pr] }
+ISA['SPRF'] = { opcode:'F4', format:[p0, pr, pr] }
 
 var LABELS = [] // A comma separated string like address0,label0,address1,label1,...
 var MYADDR      // A number with current instruction memory address
@@ -172,8 +172,8 @@ function pr(reg) {
 // Parse a port number (0-15)
 function pp(reg) {
   reg = reg.trim()
-  if (reg.length == 1)
-    return parseInt(reg, 16)
+  if (reg.length == 2 && reg[0] == 'P')
+    return parseInt(reg[1], 16)
 }
 
 // Parse an absolute address out of a number or a label
